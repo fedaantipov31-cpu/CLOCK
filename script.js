@@ -49,17 +49,19 @@ clockScreen.classList.remove("active");
 
 
 // ==========================================
-// GMAIL
+// GMAIL — ВСЕГДА ОДНО И ТО ЖЕ ОКНО
 // ==========================================
 
-// Одна и та же ссылка Gmail
 const gmailURL = "https://mail.google.com/";
 
-// Здесь храним уже открытое окно Gmail
-let gmailWindow = null;
-
-
 gmailButton.addEventListener("click", () => {
+
+    window.open(
+        gmailURL,
+        "gmailWindow"
+    );
+
+});
 
     // --------------------------------------
     // ЕСЛИ ОТКРЫТО В TELEGRAM
