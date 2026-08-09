@@ -1,779 +1,99 @@
 /* ===================================================
-   RESET
+   ПЕРЕХОД ПРИ ВЫБОРЕ ГОРОДА
 =================================================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+.transition-circle {
+    position: fixed;
 
-html,
-body{
+    width: 70px;
+    height: 70px;
 
-    width:100%;
-    height:100%;
+    border-radius: 50%;
 
-    font-family:"Inter",sans-serif;
+    background: #6F4E37;
 
-    overflow:hidden;
+    pointer-events: none;
 
-}
+    z-index: 9999;
 
-/* ===================================================
-   BODY
-=================================================== */
-
-body{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:#0f0f0f;
-
-    color:#ffffff;
-
-    position:relative;
-
-}
-
-/* ===================================================
-   TELEGRAM
-=================================================== */
-
-body.telegram{
-
-    background:var(--tg-theme-bg-color,#0f0f0f);
-
-    color:var(--tg-theme-text-color,#ffffff);
-
-}
-
-/* ===================================================
-   BACKGROUND
-=================================================== */
-
-.background{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:-5;
-
-    overflow:hidden;
-
-    background:
-
-    radial-gradient(circle at top left,
-    rgba(111,78,55,.30),
-    transparent 40%),
-
-    radial-gradient(circle at bottom right,
-    rgba(80,80,80,.25),
-    transparent 45%),
-
-    linear-gradient(
-    180deg,
-    #222222,
-    #141414,
-    #090909);
-
-}
-
-/* ===================================================
-   DECOR
-=================================================== */
-
-.circle{
-
-    position:absolute;
-
-    border-radius:50%;
-
-    filter:blur(90px);
-
-    opacity:.22;
-
-    animation:float 18s ease-in-out infinite;
-
-}
-
-.c1{
-
-    width:320px;
-
-    height:320px;
-
-    background:#7b5b42;
-
-    top:-120px;
-
-    left:-120px;
-
-}
-
-.c2{
-
-    width:380px;
-
-    height:380px;
-
-    background:#505050;
-
-    bottom:-150px;
-
-    right:-120px;
-
-    animation-duration:22s;
-
-}
-
-/* ===================================================
-   FLOAT
-=================================================== */
-
-@keyframes float{
-
-0%{
-
-transform:translateY(0);
-
-}
-
-50%{
-
-transform:translateY(-35px);
-
-}
-
-100%{
-
-transform:translateY(0);
-
-}
-
-}
-
-/* ===================================================
-   CONTAINER
-=================================================== */
-
-.container{
-
-    width:100%;
-
-    padding:24px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-/* ===================================================
-   CARD
-=================================================== */
-
-.glass-card{
-
-    width:100%;
-
-    max-width:470px;
-
-    background:
-
-    rgba(32,32,32,.92);
-
-    border:
-
-    1px solid rgba(255,255,255,.08);
-
-    border-radius:28px;
-
-    backdrop-filter:blur(16px);
-
-    padding:42px;
-
-    box-shadow:
-
-    0 30px 80px rgba(0,0,0,.45),
-
-    inset 0 1px rgba(255,255,255,.06);
-
-    animation:fadeUp .7s ease;
-
-}
-
-/* ===================================================
-   APPEAR
-=================================================== */
-
-@keyframes fadeUp{
-
-from{
-
-opacity:0;
-
-transform:translateY(40px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-/* ===================================================
-   LOGO
-=================================================== */
-
-.logo{
-
-    width:86px;
-
-    height:86px;
-
-    margin:auto;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:40px;
-
-    background:
-
-    linear-gradient(
-    145deg,
-    #8b6b4a,
-    #5b402c);
-
-    color:#fff;
-
-    box-shadow:
-
-    0 15px 35px rgba(0,0,0,.35);
-
-    margin-bottom:26px;
-
-}
-
-/* ===================================================
-   TITLES
-=================================================== */
-
-h1{
-
-    text-align:center;
-
-    font-size:31px;
-
-    font-weight:800;
-
-    margin-bottom:12px;
-
-    color:#ffffff;
-
-}
-
-.subtitle{
-
-    text-align:center;
-
-    color:#bfbfbf;
-
-    font-size:15px;
-
-    margin-bottom:32px;
-
-    line-height:1.6;
-
-}
-
-/* ===================================================
-   TIME BOX
-=================================================== */
-
-.time-box{
-
-    padding:30px;
-
-    border-radius:20px;
-
-    background:
-
-    linear-gradient(
-    180deg,
-    rgba(255,255,255,.04),
-    rgba(255,255,255,.02));
-
-    border:
-
-    1px solid rgba(255,255,255,.08);
-
-    margin-bottom:32px;
-
-}
-
-/* ===================================================
-   TIME
-=================================================== */
-
-.time{
-
-    text-align:center;
-
-    font-size:54px;
-
-    font-weight:800;
-
-    letter-spacing:3px;
-
-    color:#ffffff;
-
-    transition:
-
-    transform .25s,
-
-    opacity .25s;
-
-}
-
-.time.update{
-
-    transform:scale(1.05);
-
-    opacity:.75;
-
-}
-
-/* ===================================================
-   DATE
-=================================================== */
-
-.date{
-
-    margin-top:14px;
-
-    text-align:center;
-
-    color:#c8c8c8;
-
-    font-size:18px;
-
-    line-height:1.5;
-
-}
-
-/* ===================================================
-   TRANSITION CIRCLE
-=================================================== */
-
-.transition-circle{
-
-    position:fixed;
-
-    width:40px;
-
-    height:40px;
-
-    border-radius:50%;
-
-    background:#6F4E37;
-
-    pointer-events:none;
+    opacity: 0;
 
     transform:
+        translate(-50%, -50%)
+        scale(0);
 
-    translate(-50%,-50%) scale(0);
-
-    z-index:999;
-
-    opacity:.95;
-
+    will-change: transform, opacity;
 }
 
-.transition-circle.active{
 
-    animation:expand .55s ease forwards;
+/* Запуск анимации */
 
+.transition-circle.active {
+    animation: cityTransition 2.2s ease-in-out forwards;
 }
 
-@keyframes expand{
-
-0%{
-
-transform:
-
-translate(-50%,-50%)
-
-scale(0);
-
-}
-
-100%{
-
-transform:
-
-translate(-50%,-50%)
-
-scale(65);
-
-}
-
-}
-/* ===================================================
-   CITIES
-=================================================== */
-
-.cities{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:14px;
-
-}
 
 /* ===================================================
-   BUTTONS
+   АНИМАЦИЯ
+
+   0–0.5 сек   → круг растекается
+   0.5–1.5 сек → полностью коричневый экран
+   1.5–2.2 сек → коричневый слой исчезает
 =================================================== */
 
-.city-btn{
+@keyframes cityTransition {
 
-    width:100%;
+    /* Кнопка */
 
-    height:58px;
+    0% {
+        opacity: 1;
 
-    border:none;
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+    }
 
-    border-radius:16px;
 
-    cursor:pointer;
+    /* Растекается */
 
-    font-size:17px;
+    25% {
+        opacity: 1;
 
-    font-weight:600;
+        transform:
+            translate(-50%, -50%)
+            scale(70);
+    }
 
-    letter-spacing:.3px;
 
-    color:#ffffff;
+    /* Коричневый экран */
 
-    background:
+    65% {
+        opacity: 1;
 
-    linear-gradient(
-    180deg,
-    #4b4b4b,
-    #2f2f2f);
+        transform:
+            translate(-50%, -50%)
+            scale(70);
+    }
 
-    border:1px solid rgba(255,255,255,.08);
 
-    box-shadow:
+    /* Начинает исчезать */
 
-    0 8px 18px rgba(0,0,0,.22);
+    85% {
+        opacity: 1;
 
-    transition:
+        transform:
+            translate(-50%, -50%)
+            scale(70);
+    }
 
-    background .25s ease,
 
-    transform .25s ease,
+    /* Возвращается интерфейс */
 
-    box-shadow .25s ease,
+    100% {
+        opacity: 0;
 
-    border-color .25s ease;
-
-}
-
-.city-btn:hover{
-
-    transform:translateY(-3px);
-
-    background:
-
-    linear-gradient(
-    180deg,
-    #6f4e37,
-    #5b402c);
-
-    box-shadow:
-
-    0 14px 28px rgba(0,0,0,.35);
-
-}
-
-.city-btn:active{
-
-    transform:scale(.97);
-
-}
-
-/* ===================================================
-   ACTIVE BUTTON
-=================================================== */
-
-.city-btn.active{
-
-    background:
-
-    linear-gradient(
-    180deg,
-    #8b6b4a,
-    #6F4E37);
-
-    border-color:
-
-    rgba(255,255,255,.18);
-
-    box-shadow:
-
-    0 12px 28px rgba(111,78,55,.45);
-
-}
-
-/* ===================================================
-   FOCUS
-=================================================== */
-
-.city-btn:focus{
-
-    outline:none;
-
-}
-
-/* ===================================================
-   TIME ANIMATION
-=================================================== */
-
-.time{
-
-    transition:
-
-    transform .25s ease,
-
-    opacity .25s ease,
-
-    color .25s ease;
-
-}
-
-.time.update{
-
-    transform:scale(1.08);
-
-    opacity:.75;
-
-}
-
-/* ===================================================
-   CARD HOVER
-=================================================== */
-
-.glass-card{
-
-    transition:
-
-    transform .35s ease,
-
-    box-shadow .35s ease;
-
-}
-
-.glass-card:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:
-
-    0 40px 90px rgba(0,0,0,.45);
-
-}
-
-/* ===================================================
-   SCROLLBAR
-=================================================== */
-
-::-webkit-scrollbar{
-
-    width:8px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#5b5b5b;
-
-    border-radius:20px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:#7a7a7a;
-
-}
-
-/* ===================================================
-   SELECTION
-=================================================== */
-
-::selection{
-
-    background:#6F4E37;
-
-    color:#ffffff;
-
-}
-
-/* ===================================================
-   MOBILE
-=================================================== */
-
-@media (max-width:520px){
-
-.container{
-
-padding:16px;
-
-}
-
-.glass-card{
-
-padding:28px;
-
-border-radius:22px;
-
-}
-
-.logo{
-
-width:72px;
-height:72px;
-
-font-size:34px;
-
-margin-bottom:22px;
-
-}
-
-h1{
-
-font-size:26px;
-
-}
-
-.subtitle{
-
-font-size:14px;
-
-margin-bottom:24px;
-
-}
-
-.time-box{
-
-padding:22px;
-
-}
-
-.time{
-
-font-size:42px;
-
-letter-spacing:2px;
-
-}
-
-.date{
-
-font-size:15px;
-
-}
-
-.city-btn{
-
-height:54px;
-
-font-size:16px;
-
-}
-
-}
-
-/* ===================================================
-   SMALL PHONES
-=================================================== */
-
-@media (max-width:390px){
-
-.glass-card{
-
-padding:22px;
-
-}
-
-.logo{
-
-width:64px;
-height:64px;
-
-font-size:30px;
-
-}
-
-.time{
-
-font-size:36px;
-
-}
-
-.city-btn{
-
-height:50px;
-
-font-size:15px;
-
-}
-
-}
-
-/* ===================================================
-   SMOOTH
-=================================================== */
-
-body{
-
-    animation:pageFade .5s ease;
-
-}
-
-@keyframes pageFade{
-
-from{
-
-opacity:0;
-
-}
-
-to{
-
-opacity:1;
-
-}
-
+        transform:
+            translate(-50%, -50%)
+            scale(70);
+    }
 }
