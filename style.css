@@ -1,99 +1,25 @@
-/* ===================================================
-   ПЕРЕХОД ПРИ ВЫБОРЕ ГОРОДА
-=================================================== */
-
-.transition-circle {
-    position: fixed;
-
-    width: 70px;
-    height: 70px;
-
-    border-radius: 50%;
-
-    background: #6F4E37;
-
-    pointer-events: none;
-
-    z-index: 9999;
-
-    opacity: 0;
-
-    transform:
-        translate(-50%, -50%)
-        scale(0);
-
-    will-change: transform, opacity;
+body {
+    background: #111111 !important;
+    color: white !important;
+    font-family: Arial, sans-serif !important;
 }
 
-
-/* Запуск анимации */
-
-.transition-circle.active {
-    animation: cityTransition 2.2s ease-in-out forwards;
+.glass-card {
+    background: #6F4E37 !important;
+    padding: 40px !important;
+    border-radius: 25px !important;
+    max-width: 450px !important;
+    margin: 50px auto !important;
+    text-align: center !important;
 }
 
-
-/* ===================================================
-   АНИМАЦИЯ
-
-   0–0.5 сек   → круг растекается
-   0.5–1.5 сек → полностью коричневый экран
-   1.5–2.2 сек → коричневый слой исчезает
-=================================================== */
-
-@keyframes cityTransition {
-
-    /* Кнопка */
-
-    0% {
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%)
-            scale(0);
-    }
-
-
-    /* Растекается */
-
-    25% {
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%)
-            scale(70);
-    }
-
-
-    /* Коричневый экран */
-
-    65% {
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%)
-            scale(70);
-    }
-
-
-    /* Начинает исчезать */
-
-    85% {
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%)
-            scale(70);
-    }
-
-
-    /* Возвращается интерфейс */
-
-    100% {
-        opacity: 0;
-
-        transform:
-            translate(-50%, -50%)
-            scale(70);
-    }
+.city-btn {
+    display: block !important;
+    width: 100% !important;
+    margin: 10px 0 !important;
+    padding: 15px !important;
+    background: #222 !important;
+    color: white !important;
+    border: 1px solid #777 !important;
+    border-radius: 12px !important;
 }
