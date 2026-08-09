@@ -9,14 +9,14 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     >
 
-    <meta name="theme-color" content="#11100f">
+    <meta name="theme-color" content="#0d0d0d">
 
-    <title>Мировые часы</title>
+    <title>Mini App</title>
 
-    <!-- Telegram Mini App -->
+    <!-- Telegram -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-    <!-- Шрифт -->
+    <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -25,609 +25,981 @@
         rel="stylesheet"
     >
 
-    <!-- ВСЕ СТИЛИ ПРЯМО ЗДЕСЬ -->
-    <style>
+<style>
 
-        /* =========================
-           RESET
-        ========================= */
+/* =========================================
+   RESET
+========================================= */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        html,
-        body {
-            width: 100%;
-            min-height: 100%;
-        }
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
 
-        body {
-            min-height: 100vh;
+body {
+    min-height: 100vh;
 
-            font-family: "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
 
-            background: #0d0d0d;
-            color: #ffffff;
+    background: #0d0d0d;
+    color: #ffffff;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-            overflow-x: hidden;
-        }
+    overflow-x: hidden;
+}
 
 
-        /* =========================
-           BACKGROUND
-        ========================= */
+/* =========================================
+   BACKGROUND
+========================================= */
 
-        .background {
-            position: fixed;
-            inset: 0;
+.background {
 
-            z-index: -10;
+    position: fixed;
+    inset: 0;
 
-            overflow: hidden;
+    z-index: -10;
 
-            background:
-                radial-gradient(
-                    circle at 15% 10%,
-                    rgba(126, 91, 62, 0.32),
-                    transparent 38%
-                ),
+    overflow: hidden;
 
-                radial-gradient(
-                    circle at 85% 85%,
-                    rgba(100, 100, 100, 0.18),
-                    transparent 40%
-                ),
+    background:
 
-                linear-gradient(
-                    160deg,
-                    #29241f 0%,
-                    #171513 35%,
-                    #0b0b0b 75%,
-                    #050505 100%
-                );
-        }
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(126,91,62,.32),
+            transparent 38%
+        ),
 
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(100,100,100,.18),
+            transparent 40%
+        ),
 
-        /* =========================
-           DECORATION
-        ========================= */
+        linear-gradient(
+            160deg,
+            #29241f 0%,
+            #171513 35%,
+            #0b0b0b 75%,
+            #050505 100%
+        );
+}
 
-        .circle {
-            position: absolute;
 
-            border-radius: 50%;
+/* =========================================
+   DECORATION
+========================================= */
 
-            filter: blur(100px);
+.circle {
 
-            opacity: 0.18;
+    position: absolute;
 
-            animation: floatCircle 15s ease-in-out infinite;
-        }
+    border-radius: 50%;
 
-        .c1 {
-            width: 330px;
-            height: 330px;
+    filter: blur(100px);
 
-            top: -120px;
-            left: -100px;
+    opacity: .18;
 
-            background: #9b7250;
-        }
+    animation: floatCircle 15s ease-in-out infinite;
+}
 
-        .c2 {
-            width: 400px;
-            height: 400px;
+.c1 {
 
-            right: -150px;
-            bottom: -150px;
+    width: 330px;
+    height: 330px;
 
-            background: #686868;
+    top: -120px;
+    left: -100px;
 
-            animation-duration: 20s;
-        }
+    background: #9b7250;
+}
 
-        @keyframes floatCircle {
+.c2 {
 
-            0%,
-            100% {
-                transform: translateY(0);
-            }
+    width: 400px;
+    height: 400px;
 
-            50% {
-                transform: translateY(-30px);
-            }
-        }
+    right: -150px;
+    bottom: -150px;
 
+    background: #686868;
 
-        /* =========================
-           CONTAINER
-        ========================= */
+    animation-duration: 20s;
+}
 
-        .container {
-            width: 100%;
+@keyframes floatCircle {
 
-            padding: 24px;
+    0%,
+    100% {
+        transform: translateY(0);
+    }
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    50% {
+        transform: translateY(-30px);
+    }
+}
 
 
-        /* =========================
-           MAIN CARD
-        ========================= */
+/* =========================================
+   CONTAINER
+========================================= */
 
-        .glass-card {
-            width: 100%;
-            max-width: 460px;
+.container {
 
-            padding: 38px;
+    width: 100%;
 
-            border-radius: 28px;
+    min-height: 100vh;
 
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(42, 39, 36, 0.96),
-                    rgba(22, 22, 22, 0.96)
-                );
+    padding: 24px;
 
-            border: 1px solid rgba(255, 255, 255, 0.10);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-            box-shadow:
-                0 30px 80px rgba(0, 0, 0, 0.55),
-                inset 0 1px rgba(255, 255, 255, 0.07);
 
-            backdrop-filter: blur(20px);
+/* =========================================
+   CARD
+========================================= */
 
-            animation: cardAppear 0.7s ease;
-        }
+.card {
 
-        @keyframes cardAppear {
+    width: 100%;
+    max-width: 460px;
 
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
+    padding: 38px;
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    border-radius: 28px;
 
+    background:
+        linear-gradient(
+            145deg,
+            rgba(42,39,36,.96),
+            rgba(22,22,22,.96)
+        );
 
-        /* =========================
-           LOGO
-        ========================= */
+    border:
+        1px solid rgba(255,255,255,.10);
 
-        .logo {
-            width: 78px;
-            height: 78px;
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.55),
+        inset 0 1px rgba(255,255,255,.07);
 
-            margin: 0 auto 22px;
+    backdrop-filter: blur(20px);
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    animation: cardAppear .55s ease;
+}
 
-            border-radius: 50%;
+@keyframes cardAppear {
 
-            font-size: 34px;
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
 
-            background:
-                linear-gradient(
-                    145deg,
-                    #96704f,
-                    #5e422f
-                );
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-            border: 1px solid rgba(255, 255, 255, 0.13);
 
-            box-shadow:
-                0 15px 35px rgba(0, 0, 0, 0.35);
-        }
+/* =========================================
+   SCREENS
+========================================= */
 
+.screen {
+    display: none;
+}
 
-        /* =========================
-           TITLE
-        ========================= */
+.screen.active {
+    display: block;
+}
 
-        #cityTitle {
-            text-align: center;
 
-            font-size: 31px;
-            font-weight: 700;
+/* =========================================
+   LOGO
+========================================= */
 
-            letter-spacing: -0.5px;
+.logo {
 
-            color: #ffffff;
+    width: 78px;
+    height: 78px;
 
-            margin-bottom: 8px;
-        }
+    margin: 0 auto 22px;
 
-        .subtitle {
-            text-align: center;
+    border-radius: 50%;
 
-            color: #aeadab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            font-size: 14px;
+    font-size: 34px;
 
-            margin-bottom: 28px;
-        }
+    background:
+        linear-gradient(
+            145deg,
+            #96704f,
+            #5e422f
+        );
 
+    border:
+        1px solid rgba(255,255,255,.13);
 
-        /* =========================
-           TIME BOX
-        ========================= */
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.35);
+}
 
-        .time-box {
-            width: 100%;
 
-            padding: 28px 18px;
+/* =========================================
+   TEXT
+========================================= */
 
-            margin-bottom: 28px;
+.title {
 
-            border-radius: 20px;
+    text-align: center;
 
-            background: rgba(255, 255, 255, 0.035);
+    font-size: 31px;
 
-            border: 1px solid rgba(255, 255, 255, 0.08);
+    font-weight: 700;
 
-            box-shadow:
-                inset 0 1px rgba(255, 255, 255, 0.04);
-        }
+    letter-spacing: -.5px;
 
-        .time {
-            text-align: center;
+    margin-bottom: 9px;
+}
 
-            font-size: 50px;
-            font-weight: 700;
+.subtitle {
 
-            letter-spacing: 3px;
+    text-align: center;
 
-            color: #ffffff;
+    color: #aaa7a4;
 
-            transition:
-                transform 0.25s ease,
-                opacity 0.25s ease;
-        }
+    font-size: 14px;
 
-        .time.update {
-            transform: scale(1.04);
-            opacity: 0.75;
-        }
+    line-height: 1.6;
 
-        .date {
-            text-align: center;
+    margin-bottom: 30px;
+}
 
-            margin-top: 12px;
 
-            color: #aaa7a4;
+/* =========================================
+   MAIN MENU
+========================================= */
 
-            font-size: 15px;
+.menu {
 
-            line-height: 1.5;
-        }
+    display: flex;
 
+    flex-direction: column;
 
-        /* =========================
-           CITY BUTTONS
-        ========================= */
+    gap: 14px;
+}
 
-        .cities {
-            display: flex;
-            flex-direction: column;
 
-            gap: 11px;
-        }
+/* =========================================
+   MENU BUTTON
+========================================= */
 
-        .city-btn {
-            width: 100%;
-            height: 54px;
+.menu-btn {
 
-            border-radius: 15px;
+    position: relative;
 
-            border: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
 
-            background:
-                linear-gradient(
-                    180deg,
-                    #353331,
-                    #262523
-                );
+    min-height: 72px;
 
-            color: #eaeaea;
+    padding: 0 20px;
 
-            font-family: inherit;
+    border-radius: 18px;
 
-            font-size: 15px;
-            font-weight: 600;
+    border:
+        1px solid rgba(255,255,255,.09);
 
-            cursor: pointer;
+    color: #ffffff;
 
-            transition:
-                transform 0.2s ease,
-                background 0.2s ease,
-                border-color 0.2s ease,
-                box-shadow 0.2s ease;
-        }
+    background:
+        linear-gradient(
+            145deg,
+            #5b4332,
+            #382e27
+        );
 
-        .city-btn:hover {
-            transform: translateY(-2px);
+    font-family: inherit;
 
-            background:
-                linear-gradient(
-                    180deg,
-                    #574638,
-                    #3c3129
-                );
+    cursor: pointer;
 
-            border-color: rgba(255, 255, 255, 0.13);
-        }
+    display: flex;
 
-        .city-btn:active {
-            transform: scale(0.97);
-        }
+    align-items: center;
 
-        .city-btn.active {
-            color: #ffffff;
+    gap: 16px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #8a6548,
-                    #654732
-                );
+    text-align: left;
 
-            border-color: rgba(255, 255, 255, 0.16);
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.22);
 
-            box-shadow:
-                0 10px 25px rgba(70, 45, 30, 0.32);
-        }
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
 
+.menu-btn:hover {
 
-        /* =========================
-           КОРИЧНЕВАЯ АНИМАЦИЯ
-        ========================= */
+    transform: translateY(-3px);
 
-        .transition-circle {
-            position: fixed;
+    border-color:
+        rgba(255,255,255,.17);
 
-            width: 70px;
-            height: 70px;
+    background:
+        linear-gradient(
+            145deg,
+            #76563f,
+            #47372c
+        );
 
-            border-radius: 50%;
+    box-shadow:
+        0 16px 32px rgba(0,0,0,.30);
+}
 
-            background: #6f4e37;
+.menu-btn:active {
 
-            z-index: 9999;
+    transform: scale(.975);
+}
 
-            pointer-events: none;
 
-            opacity: 0;
+/* =========================================
+   BUTTON ICON
+========================================= */
 
-            transform:
-                translate(-50%, -50%)
-                scale(0);
+.menu-icon {
 
-            will-change: transform, opacity;
-        }
+    width: 44px;
+    height: 44px;
 
+    flex-shrink: 0;
 
-        /*
-           0 - 0.5 сек:
-           круг заполняет экран
+    display: flex;
 
-           затем экран некоторое время
-           полностью коричневый
+    align-items: center;
+    justify-content: center;
 
-           потом слой исчезает
-        */
+    border-radius: 13px;
 
-        .transition-circle.active {
-            animation:
-                cityTransition 2.2s ease-in-out forwards;
-        }
+    font-size: 22px;
 
+    background:
+        rgba(255,255,255,.08);
 
-        @keyframes cityTransition {
+    border:
+        1px solid rgba(255,255,255,.07);
+}
 
-            0% {
-                opacity: 1;
 
-                transform:
-                    translate(-50%, -50%)
-                    scale(0);
-            }
+/* =========================================
+   BUTTON TEXT
+========================================= */
 
-            25% {
-                opacity: 1;
+.menu-text {
 
-                transform:
-                    translate(-50%, -50%)
-                    scale(80);
-            }
+    display: flex;
 
-            70% {
-                opacity: 1;
+    flex-direction: column;
 
-                transform:
-                    translate(-50%, -50%)
-                    scale(80);
-            }
+    gap: 4px;
+}
 
-            100% {
-                opacity: 0;
+.menu-title {
 
-                transform:
-                    translate(-50%, -50%)
-                    scale(80);
-            }
-        }
+    font-size: 16px;
 
+    font-weight: 700;
+}
 
-        /* =========================
-           MOBILE
-        ========================= */
+.menu-description {
 
-        @media (max-width: 520px) {
+    color: #bbb6b1;
 
-            body {
-                align-items: flex-start;
-            }
+    font-size: 12px;
 
-            .container {
-                padding: 16px;
-            }
+    font-weight: 400;
+}
 
-            .glass-card {
-                padding: 26px 22px;
+.menu-arrow {
 
-                border-radius: 23px;
-            }
+    margin-left: auto;
 
-            .logo {
-                width: 66px;
-                height: 66px;
+    color: #c5b7ac;
 
-                font-size: 29px;
+    font-size: 20px;
+}
 
-                margin-bottom: 18px;
-            }
 
-            #cityTitle {
-                font-size: 25px;
-            }
+/* =========================================
+   DISABLED BUTTON
+========================================= */
 
-            .subtitle {
-                font-size: 13px;
+.menu-btn.disabled {
 
-                margin-bottom: 22px;
-            }
+    opacity: .48;
 
-            .time-box {
-                padding: 22px 12px;
+    cursor: default;
+}
 
-                margin-bottom: 22px;
-            }
+.menu-btn.disabled:hover {
 
-            .time {
-                font-size: 39px;
+    transform: none;
 
-                letter-spacing: 2px;
-            }
+    background:
+        linear-gradient(
+            145deg,
+            #5b4332,
+            #382e27
+        );
 
-            .date {
-                font-size: 14px;
-            }
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.22);
+}
 
-            .city-btn {
-                height: 49px;
 
-                font-size: 14px;
-            }
-        }
+/* =========================================
+   CLOCK HEADER
+========================================= */
 
+.clock-header {
 
-        /* =========================
-           SMALL PHONE
-        ========================= */
+    position: relative;
 
-        @media (max-width: 360px) {
+    margin-bottom: 24px;
+}
 
-            .container {
-                padding: 10px;
-            }
+.back-btn {
 
-            .glass-card {
-                padding: 21px 17px;
-            }
+    position: absolute;
 
-            .time {
-                font-size: 34px;
-            }
+    top: 0;
+    left: 0;
 
-            .city-btn {
-                height: 46px;
-            }
-        }
+    width: 42px;
+    height: 42px;
 
+    border: 1px solid rgba(255,255,255,.08);
 
-        /* =========================
-           TELEGRAM
-        ========================= */
+    border-radius: 13px;
 
-        body.telegram {
-            color: #ffffff;
-        }
+    background:
+        rgba(255,255,255,.05);
 
+    color: white;
 
-        /* =========================
-           SELECTION
-        ========================= */
+    font-size: 20px;
 
-        ::selection {
-            background: #75543c;
-            color: #ffffff;
-        }
+    cursor: pointer;
 
-    </style>
+    transition: .2s ease;
+}
+
+.back-btn:hover {
+
+    background:
+        rgba(255,255,255,.10);
+}
+
+.back-btn:active {
+
+    transform: scale(.94);
+}
+
+
+/* =========================================
+   CLOCK LOGO
+========================================= */
+
+.clock-logo {
+
+    width: 68px;
+    height: 68px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #96704f,
+            #5e422f
+        );
+}
+
+
+/* =========================================
+   TIME
+========================================= */
+
+.time-box {
+
+    width: 100%;
+
+    padding: 28px 18px;
+
+    margin-bottom: 26px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+}
+
+.time {
+
+    text-align: center;
+
+    font-size: 50px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    transition:
+        transform .25s ease,
+        opacity .25s ease;
+}
+
+.time.update {
+
+    transform: scale(1.04);
+
+    opacity: .72;
+}
+
+.date {
+
+    margin-top: 12px;
+
+    text-align: center;
+
+    color: #aaa7a4;
+
+    font-size: 15px;
+}
+
+
+/* =========================================
+   CITIES
+========================================= */
+
+.cities {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+}
+
+.city-btn {
+
+    width: 100%;
+
+    height: 52px;
+
+    border-radius: 15px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    background:
+        linear-gradient(
+            180deg,
+            #353331,
+            #262523
+        );
+
+    color: #eaeaea;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+.city-btn:hover {
+
+    transform: translateY(-2px);
+
+    background:
+        linear-gradient(
+            180deg,
+            #574638,
+            #3c3129
+        );
+}
+
+.city-btn:active {
+
+    transform: scale(.97);
+}
+
+.city-btn.active {
+
+    background:
+        linear-gradient(
+            135deg,
+            #8a6548,
+            #654732
+        );
+
+    box-shadow:
+        0 10px 25px rgba(70,45,30,.32);
+}
+
+
+/* =========================================
+   CITY TRANSITION
+========================================= */
+
+.transition-circle {
+
+    position: fixed;
+
+    width: 70px;
+    height: 70px;
+
+    border-radius: 50%;
+
+    background: #6f4e37;
+
+    z-index: 9999;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0);
+}
+
+.transition-circle.active {
+
+    animation:
+        cityTransition 2.2s ease-in-out forwards;
+}
+
+@keyframes cityTransition {
+
+    0% {
+
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+    }
+
+    25% {
+
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(80);
+    }
+
+    70% {
+
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(80);
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(80);
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 520px) {
+
+    body {
+        align-items: flex-start;
+    }
+
+    .container {
+        padding: 16px;
+    }
+
+    .card {
+
+        padding: 27px 22px;
+
+        border-radius: 23px;
+    }
+
+    .logo {
+
+        width: 68px;
+        height: 68px;
+
+        font-size: 30px;
+    }
+
+    .title {
+
+        font-size: 26px;
+    }
+
+    .menu-btn {
+
+        min-height: 68px;
+    }
+
+    .time {
+
+        font-size: 39px;
+    }
+
+    .date {
+
+        font-size: 14px;
+    }
+}
+
+</style>
 
 </head>
 
 
 <body>
 
-    <!-- ФОН -->
 
-    <div class="background">
-        <div class="circle c1"></div>
-        <div class="circle c2"></div>
-    </div>
+<!-- BACKGROUND -->
 
+<div class="background">
 
-    <!--
-        Этот круг используется script.js
-        для эффекта растекания
-    -->
+    <div class="circle c1"></div>
 
-    <div
-        id="transition"
-        class="transition-circle"
-    ></div>
+    <div class="circle c2"></div>
+
+</div>
 
 
-    <!-- ПРИЛОЖЕНИЕ -->
+<!-- АНИМАЦИЯ ГОРОДА -->
 
-    <main class="container">
+<div
+    id="transition"
+    class="transition-circle"
+></div>
 
-        <section class="glass-card">
+
+<main class="container">
+
+    <section class="card">
+
+
+        <!-- =====================================
+             ГЛАВНОЕ МЕНЮ
+        ====================================== -->
+
+        <div
+            id="homeScreen"
+            class="screen active"
+        >
+
 
             <div class="logo">
-                🕒
+                ◆
             </div>
 
 
-            <h1 id="cityTitle">
-                Москва
+            <h1 class="title">
+                Главное меню
             </h1>
 
 
             <p class="subtitle">
-                Выберите город
+                Выберите приложение
             </p>
 
 
-            <!-- ВРЕМЯ -->
+            <div class="menu">
+
+
+                <!-- Gmail -->
+
+                <button
+                    id="gmailButton"
+                    class="menu-btn"
+                    type="button"
+                >
+
+                    <div class="menu-icon">
+                        ✉
+                    </div>
+
+                    <div class="menu-text">
+
+                        <span class="menu-title">
+                            Gmail
+                        </span>
+
+                        <span class="menu-description">
+                            Открыть электронную почту
+                        </span>
+
+                    </div>
+
+                    <div class="menu-arrow">
+                        ›
+                    </div>
+
+                </button>
+
+
+                <!-- WORLD CLOCK -->
+
+                <button
+                    id="clockButton"
+                    class="menu-btn"
+                    type="button"
+                >
+
+                    <div class="menu-icon">
+                        ◷
+                    </div>
+
+                    <div class="menu-text">
+
+                        <span class="menu-title">
+                            Мировые часы
+                        </span>
+
+                        <span class="menu-description">
+                            Время в разных городах
+                        </span>
+
+                    </div>
+
+                    <div class="menu-arrow">
+                        ›
+                    </div>
+
+                </button>
+
+
+                <!-- EMPTY -->
+
+                <button
+                    id="thirdButton"
+                    class="menu-btn disabled"
+                    type="button"
+                >
+
+                    <div class="menu-icon">
+                        +
+                    </div>
+
+                    <div class="menu-text">
+
+                        <span class="menu-title">
+                            Скоро
+                        </span>
+
+                        <span class="menu-description">
+                            Здесь появится новое приложение
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             ЧАСЫ
+        ====================================== -->
+
+        <div
+            id="clockScreen"
+            class="screen"
+        >
+
+
+            <div class="clock-header">
+
+                <button
+                    id="backButton"
+                    class="back-btn"
+                    type="button"
+                >
+                    ←
+                </button>
+
+
+                <div class="clock-logo">
+                    🕒
+                </div>
+
+
+                <h1
+                    id="cityTitle"
+                    class="title"
+                >
+                    Москва
+                </h1>
+
+
+                <p class="subtitle">
+                    Выберите город
+                </p>
+
+            </div>
+
 
             <div class="time-box">
 
@@ -637,6 +1009,7 @@
                 >
                     --:--:--
                 </div>
+
 
                 <div
                     id="date"
@@ -648,14 +1021,12 @@
             </div>
 
 
-            <!-- ГОРОДА -->
-
             <div class="cities">
+
 
                 <button
                     class="city-btn active"
                     data-city="moscow"
-                    type="button"
                 >
                     Москва
                 </button>
@@ -664,7 +1035,6 @@
                 <button
                     class="city-btn"
                     data-city="petersburg"
-                    type="button"
                 >
                     Санкт-Петербург
                 </button>
@@ -673,7 +1043,6 @@
                 <button
                     class="city-btn"
                     data-city="valday"
-                    type="button"
                 >
                     Валдай
                 </button>
@@ -682,7 +1051,6 @@
                 <button
                     class="city-btn"
                     data-city="london"
-                    type="button"
                 >
                     Лондон
                 </button>
@@ -691,21 +1059,22 @@
                 <button
                     class="city-btn"
                     data-city="milan"
-                    type="button"
                 >
                     Милан
                 </button>
 
+
             </div>
 
-        </section>
-
-    </main>
+        </div>
 
 
-    <!-- JS остаётся отдельным файлом -->
+    </section>
 
-    <script src="./script.js?v=3"></script>
+</main>
+
+
+<script src="./script.js?v=10"></script>
 
 </body>
 
