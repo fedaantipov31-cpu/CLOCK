@@ -151,7 +151,7 @@ cityButtons.forEach(button => {
 
             updateClock();
 
-        }, 220);
+        }, 1400);
 
     });
 
