@@ -1,59 +1,118 @@
-// ==============================
-// TELEGRAM
-// ==============================
+// ==========================================
+// TELEGRAM MINI APP
+// ==========================================
 
 const tg = window.Telegram?.WebApp;
 
 if (tg) {
     tg.ready();
     tg.expand();
+
     document.body.classList.add("telegram");
 }
 
 
-// ==============================
+// ==========================================
 // ЭКРАНЫ
-// ==============================
+// ==========================================
 
-const homeScreen = document.getElementById("homeScreen");
-const clockScreen = document.getElementById("clockScreen");
+const homeScreen =
+    document.getElementById("homeScreen");
 
-const gmailButton = document.getElementById("gmailButton");
-const clockButton = document.getElementById("clockButton");
-const thirdButton = document.getElementById("thirdButton");
-const backButton = document.getElementById("backButton");
+const clockScreen =
+    document.getElementById("clockScreen");
 
 
-// При старте всегда показываем главное меню
+// ==========================================
+// ГЛАВНЫЕ КНОПКИ
+// ==========================================
+
+const gmailButton =
+    document.getElementById("gmailButton");
+
+const clockButton =
+    document.getElementById("clockButton");
+
+const thirdButton =
+    document.getElementById("thirdButton");
+
+const backButton =
+    document.getElementById("backButton");
+
+
+// ==========================================
+// ПРИ ЗАПУСКЕ ПОКАЗЫВАЕМ ГЛАВНОЕ МЕНЮ
+// ==========================================
 
 homeScreen.classList.add("active");
 clockScreen.classList.remove("active");
 
 
-// ==============================
+// ==========================================
 // GMAIL
-// ==============================
+// ==========================================
+
+// Одна и та же ссылка Gmail
+const gmailURL = "https://mail.google.com/";
+
+// Здесь храним уже открытое окно Gmail
+let gmailWindow = null;
+
 
 gmailButton.addEventListener("click", () => {
 
-    const gmailURL = "https://mail.google.com/";
+    // --------------------------------------
+    // ЕСЛИ ОТКРЫТО В TELEGRAM
+    // --------------------------------------
 
-    if (tg && typeof tg.openLink === "function") {
+    if (
+        tg &&
+        typeof tg.openLink === "function"
+    ) {
+
         tg.openLink(gmailURL);
-    } else {
-        window.open(gmailURL, "_blank", "noopener,noreferrer");
+
+        return;
     }
+
+
+    // --------------------------------------
+    // ЕСЛИ ОТКРЫТО В ОБЫЧНОМ БРАУЗЕРЕ
+    // --------------------------------------
+
+    // Если Gmail уже открыт —
+    // просто переключаемся на это окно
+
+    if (
+        gmailWindow &&
+        !gmailWindow.closed
+    ) {
+
+        gmailWindow.focus();
+
+        return;
+    }
+
+
+    // Если Gmail ещё не открыт —
+    // создаём окно
+
+    gmailWindow = window.open(
+        gmailURL,
+        "gmailWindow"
+    );
 
 });
 
 
-// ==============================
-// ОТКРЫТЬ ЧАСЫ
-// ==============================
+// ==========================================
+// ОТКРЫТЬ МИРОВЫЕ ЧАСЫ
+// ==========================================
 
 clockButton.addEventListener("click", () => {
 
     homeScreen.classList.remove("active");
+
     clockScreen.classList.add("active");
 
     updateClock();
@@ -61,180 +120,356 @@ clockButton.addEventListener("click", () => {
 });
 
 
-// ==============================
-// НАЗАД
-// ==============================
+// ==========================================
+// НАЗАД В ГЛАВНОЕ МЕНЮ
+// ==========================================
 
 backButton.addEventListener("click", () => {
 
     clockScreen.classList.remove("active");
+
     homeScreen.classList.add("active");
 
 });
 
 
-// ==============================
+// ==========================================
 // ТРЕТЬЯ КНОПКА
-// ==============================
+// ==========================================
 
 thirdButton.addEventListener("click", () => {
+
     // Пока ничего не делает
+
 });
 
 
-// ==============================
+// ==========================================
 // ЭЛЕМЕНТЫ ЧАСОВ
-// ==============================
+// ==========================================
 
-const timeElement = document.getElementById("time");
-const dateElement = document.getElementById("date");
-const cityTitle = document.getElementById("cityTitle");
+const timeElement =
+    document.getElementById("time");
 
-const cityButtons = document.querySelectorAll(".city-btn");
-const transition = document.getElementById("transition");
+const dateElement =
+    document.getElementById("date");
+
+const cityTitle =
+    document.getElementById("cityTitle");
+
+const cityButtons =
+    document.querySelectorAll(".city-btn");
+
+const transition =
+    document.getElementById("transition");
 
 
-// ==============================
+// ==========================================
 // ГОРОДА
-// ==============================
+// ==========================================
 
 const cities = {
 
     moscow: {
+
         title: "Москва",
+
         timezone: "Europe/Moscow"
+
     },
+
 
     petersburg: {
+
         title: "Санкт-Петербург",
+
         timezone: "Europe/Moscow"
+
     },
+
 
     valday: {
+
         title: "Валдай",
+
         timezone: "Europe/Moscow"
+
     },
+
 
     london: {
+
         title: "Лондон",
+
         timezone: "Europe/London"
+
     },
 
+
     milan: {
+
         title: "Милан",
+
         timezone: "Europe/Rome"
+
     }
 
 };
 
 
-let currentTimezone = "Europe/Moscow";
-let currentCity = "Москва";
+// ==========================================
+// ТЕКУЩИЙ ГОРОД
+// ==========================================
+
+let currentTimezone =
+    "Europe/Moscow";
+
+let currentCity =
+    "Москва";
 
 
-// ==============================
+// ==========================================
 // ОБНОВЛЕНИЕ ВРЕМЕНИ
-// ==============================
+// ==========================================
 
 function updateClock() {
 
     const now = new Date();
 
-    const time = now.toLocaleTimeString("ru-RU", {
-        timeZone: currentTimezone,
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-    });
 
-    const date = now.toLocaleDateString("ru-RU", {
-        timeZone: currentTimezone,
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-    });
+    // ВРЕМЯ
 
-    cityTitle.textContent = currentCity;
-    timeElement.textContent = time;
+    const time =
+        now.toLocaleTimeString(
+            "ru-RU",
+            {
+
+                timeZone:
+                    currentTimezone,
+
+                hour:
+                    "2-digit",
+
+                minute:
+                    "2-digit",
+
+                second:
+                    "2-digit"
+
+            }
+        );
+
+
+    // ДАТА
+
+    const date =
+        now.toLocaleDateString(
+            "ru-RU",
+            {
+
+                timeZone:
+                    currentTimezone,
+
+                weekday:
+                    "long",
+
+                year:
+                    "numeric",
+
+                month:
+                    "long",
+
+                day:
+                    "numeric"
+
+            }
+        );
+
+
+    // НАЗВАНИЕ ГОРОДА
+
+    cityTitle.textContent =
+        currentCity;
+
+
+    // ВРЕМЯ
+
+    timeElement.classList.add(
+        "update"
+    );
+
+
+    timeElement.textContent =
+        time;
+
+
+    // ДАТА
 
     dateElement.textContent =
-        date.charAt(0).toUpperCase() + date.slice(1);
+        date.charAt(0).toUpperCase()
+        +
+        date.slice(1);
+
+
+    // Убираем небольшую анимацию цифр
+
+    setTimeout(() => {
+
+        timeElement.classList.remove(
+            "update"
+        );
+
+    }, 250);
 
 }
 
 
-// ==============================
-// АНИМАЦИЯ
-// ==============================
+// ==========================================
+// КОРИЧНЕВАЯ АНИМАЦИЯ
+// ==========================================
 
 function animateTransition(button) {
 
-    const rect = button.getBoundingClientRect();
+    const rect =
+        button.getBoundingClientRect();
+
+
+    // Центр нажатой кнопки
 
     transition.style.left =
-        rect.left + rect.width / 2 + "px";
+        rect.left
+        +
+        rect.width / 2
+        +
+        "px";
+
 
     transition.style.top =
-        rect.top + rect.height / 2 + "px";
+        rect.top
+        +
+        rect.height / 2
+        +
+        "px";
 
-    transition.classList.remove("active");
+
+    // Сбрасываем предыдущую анимацию
+
+    transition.classList.remove(
+        "active"
+    );
+
+
+    // Принудительный перезапуск CSS animation
 
     void transition.offsetWidth;
 
-    transition.classList.add("active");
+
+    // Запускаем
+
+    transition.classList.add(
+        "active"
+    );
 
 }
 
 
-// ==============================
-// ВЫБОР ГОРОДА
-// ==============================
+// ==========================================
+// НАЖАТИЕ НА ГОРОД
+// ==========================================
 
 cityButtons.forEach(button => {
 
-    button.addEventListener("click", () => {
+    button.addEventListener(
+        "click",
+        () => {
 
-        const city = cities[button.dataset.city];
 
-        if (!city) return;
+            const city =
+                cities[
+                    button.dataset.city
+                ];
 
-        cityButtons.forEach(btn => {
-            btn.classList.remove("active");
-        });
 
-        button.classList.add("active");
+            if (!city) {
+                return;
+            }
 
-        animateTransition(button);
 
-        setTimeout(() => {
+            // --------------------------------
+            // АКТИВНАЯ КНОПКА
+            // --------------------------------
 
-            currentTimezone = city.timezone;
-            currentCity = city.title;
+            cityButtons.forEach(btn => {
 
-            updateClock();
+                btn.classList.remove(
+                    "active"
+                );
 
-        }, 1300);
+            });
 
-    });
+
+            button.classList.add(
+                "active"
+            );
+
+
+            // --------------------------------
+            // КОРИЧНЕВАЯ АНИМАЦИЯ
+            // --------------------------------
+
+            animateTransition(
+                button
+            );
+
+
+            // --------------------------------
+            // МЕНЯЕМ ГОРОД,
+            // ПОКА ЭКРАН КОРИЧНЕВЫЙ
+            // --------------------------------
+
+            setTimeout(() => {
+
+                currentTimezone =
+                    city.timezone;
+
+                currentCity =
+                    city.title;
+
+                updateClock();
+
+            }, 1300);
+
+        }
+    );
 
 });
 
 
-// ==============================
-// АВТООБНОВЛЕНИЕ
-// ==============================
+// ==========================================
+// АВТООБНОВЛЕНИЕ КАЖДУЮ СЕКУНДУ
+// ==========================================
 
 setInterval(() => {
 
-    if (clockScreen.classList.contains("active")) {
+    // Обновляем только тогда,
+    // когда пользователь находится
+    // на экране часов
+
+    if (
+        clockScreen.classList.contains(
+            "active"
+        )
+    ) {
+
         updateClock();
+
     }
 
 }, 1000);
 
 
-// Подготовить время,
-// но не открывать экран часов
+// ==========================================
+// ПЕРВОЕ ОБНОВЛЕНИЕ
+// ==========================================
 
 updateClock();
