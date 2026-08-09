@@ -3,126 +3,191 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
 
-<title>Мировые часы</title>
+    <meta name="theme-color" content="#0f0f0f">
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Мировые часы</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Telegram Mini App -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link rel="stylesheet" href="style.css">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Наш CSS -->
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
+
 <body>
 
-<div class="background">
+    <!-- =========================
+         ФОН
+    ========================== -->
 
-<div class="circle c1"></div>
+    <div class="background">
 
-<div class="circle c2"></div>
+        <div class="circle c1"></div>
 
-</div>
+        <div class="circle c2"></div>
 
-<!-- Анимация раскрытия -->
+    </div>
 
-<div id="transition" class="transition-circle"></div>
 
-<main class="container">
+    <!-- =========================
+         КОРИЧНЕВАЯ АНИМАЦИЯ
+    ========================== -->
 
-<div class="glass-card">
+    <div
+        id="transition"
+        class="transition-circle"
+    ></div>
 
-<div class="logo">
 
-🕒
+    <!-- =========================
+         ПРИЛОЖЕНИЕ
+    ========================== -->
 
-</div>
+    <main class="container">
 
-<h1 id="cityTitle">
+        <div class="glass-card">
 
-Москва
 
-</h1>
+            <!-- ЛОГО -->
 
-<p class="subtitle">
+            <div class="logo">
+                🕒
+            </div>
 
-Выберите город
 
-</p>
+            <!-- ГОРОД -->
 
-<div class="time-box">
+            <h1 id="cityTitle">
+                Москва
+            </h1>
 
-<div id="time" class="time">
 
---:--:--
+            <p class="subtitle">
+                Выберите город
+            </p>
 
-</div>
 
-<div id="date" class="date">
+            <!-- =========================
+                 ВРЕМЯ
+            ========================== -->
 
-—
+            <div class="time-box">
 
-</div>
+                <div
+                    id="time"
+                    class="time"
+                >
+                    --:--:--
+                </div>
 
-</div>
 
-<div class="cities">
+                <div
+                    id="date"
+                    class="date"
+                >
+                    —
+                </div>
 
-<button
-class="city-btn active"
-data-city="moscow">
+            </div>
 
-Москва
 
-</button>
+            <!-- =========================
+                 ГОРОДА
+            ========================== -->
 
-<button
-class="city-btn"
-data-city="petersburg">
+            <div class="cities">
 
-Санкт-Петербург
 
-</button>
+                <!-- МОСКВА -->
 
-<button
-class="city-btn"
-data-city="valday">
+                <button
+                    class="city-btn active"
+                    data-city="moscow"
+                    type="button"
+                >
+                    Москва
+                </button>
 
-Валдай
 
-</button>
+                <!-- САНКТ-ПЕТЕРБУРГ -->
 
-<button
-class="city-btn"
-data-city="london">
+                <button
+                    class="city-btn"
+                    data-city="petersburg"
+                    type="button"
+                >
+                    Санкт-Петербург
+                </button>
 
-Лондон
 
-</button>
+                <!-- ВАЛДАЙ -->
 
-<button
-class="city-btn"
-data-city="milan">
+                <button
+                    class="city-btn"
+                    data-city="valday"
+                    type="button"
+                >
+                    Валдай
+                </button>
 
-Милан
 
-</button>
+                <!-- ЛОНДОН -->
 
-</div>
+                <button
+                    class="city-btn"
+                    data-city="london"
+                    type="button"
+                >
+                    Лондон
+                </button>
 
-</div>
 
-</main>
+                <!-- МИЛАН -->
 
-<script src="script.js"></script>
+                <button
+                    class="city-btn"
+                    data-city="milan"
+                    type="button"
+                >
+                    Милан
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="script.js"></script>
 
 </body>
 
